@@ -1,2 +1,4 @@
 .env
 poetry.lock
+__pycache__
+.pytest_cache
