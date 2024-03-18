@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager
 from database.connection import perform_migration, get_session
 from database.models import Todo
@@ -17,6 +18,20 @@ app = FastAPI(lifespan=lifespan, title="Todo App")
 @app.get('/')
 def home():
     return {"message": "Todo App","about":"This is a Todo App which is built using python poetry, Fast API and Sql Model. Please check out the README for more details."}
+
+origins = [
+    "http://localhost:3000",
+    "localhost:3000"
+]
+
+# Need CORSMiddleware to make cross-origin requests 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 @app.post('/todo/post')
 def create_todo(todo: Todo, session: Annotated[Session, Depends(get_session)]) -> Todo:

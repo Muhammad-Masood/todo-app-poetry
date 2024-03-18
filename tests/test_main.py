@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from sqlmodel import Field, Session, SQLModel, create_engine, select
 from database.models import Todo
-from todo_app.main import app, get_session
+from main import app, get_session
 from dotenv import load_dotenv
 import os
 from fastapi import HTTPException, Depends

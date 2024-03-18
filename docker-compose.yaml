@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+    # command: sh -c "poetry run uvicorn main:app --host 0.0.0.0 --port 8000"
+    env_file:
+      - .env
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
+    restart: always
